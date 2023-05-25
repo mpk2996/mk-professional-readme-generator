@@ -43,46 +43,48 @@ function renderLicenseSection(license) {
 
   return `## License
 
-This project is licensed under the ${license} license. Click [here](${renderLicenseLink(license)}) for more information.`;
+This project is licensed under the ${license} license. See the [License](${renderLicenseLink(license)}) file for more information.`;
 }
 
 // Function to generate markdown for README
 function generateMarkdown(data) {
-  return `# ${data.title} ${renderLicenseBadge(data.license)}
+  const { title, description, tableOfContents, installation, usage, license, contributing, test, questions } = data;
+
+  // Generate the license section of the README
+  const licenseSection = renderLicenseSection(license);
+
+  return `# ${title}
+
+${renderLicenseBadge(license)}
 
   ## Description
-  ${data.description}
+  ${description}
   
   ## Table of Contents
-  
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Contributing](#contributing)
-  - [Tests](#tests)
-  - [License](#license)
-  - [Questions](#questions)
+  ${tableOfContents}
+
   
   ## Installation
-  ${data.installation}
+  ${installation}
   
   ## Usage
-  ${data.usage}
+  ${usage}
 
-  ${renderLicenseSection(data.license)}
+  ${licenseSection}
   
   ## Contributing
-  ${renderContributingSection(data.confirmContributors, data.contribute)}
+  ${contributing}
   
   ## Tests
-  ${data.test}
+  ${test}
   
   
   ## Questions
   
   If you have any questions, feel free to reach out:
   
-  [GitHub] (https://github.com/${data.githubUsername})
-  [Email: ${data.email}](mailto:${data.email})
+  GitHub: [${questions.githubUsername}](https://github.com/${questions.githubUsername})
+  Email: ${questions.email}
 `;
 }
 

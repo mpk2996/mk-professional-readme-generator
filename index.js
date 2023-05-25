@@ -1,9 +1,10 @@
-// TODO: Include packages needed for this application
+// Packages needed for this application
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown.js');
+const generateMarkdown = require('./utils/generateMarkdown');
 const fs = require('fs');
-// TODO: Create an array of questions for user input
-const questions = [
+// Array of questions for user input
+function promptUser() {
+    return inquirer.prompt([
     {
         type: 'input',
         name: 'title',
@@ -19,7 +20,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'githubUsername',
+        name: 'questions.githubUsername',
         message: 'What is your GitHub Username?',
         validate: githubInput => {
             if (githubInput) {
@@ -32,7 +33,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'email',
+        name: 'questions.email',
         message: 'What is your email address?',
         validate: githubInput => {
             if (githubInput) {
@@ -90,22 +91,9 @@ const questions = [
         choices: ['apache 2.0', 'mit', 'gpl 3.0']
     },
     {
-        type: 'confirm',
-        name: 'confirmContributors',
-        message: 'Would you like other users to be able to contribute?',
-        default: true
-    },
-    {
         type: 'input',
         name: 'contribute',
         message: 'Please provide guidelines for contributing.',
-        when: ({ confirmContributors }) => {
-            if (confirmContributors) {
-                return true;
-            } else {
-                return false;
-            }
-        },
         validate: contributorInput => {
             if (contributorInput) {
                 return true;
@@ -128,47 +116,62 @@ const questions = [
             }
         }
     }
-];
+]);
+}
 
-
-// TODO: Create a function to write README file
+// Function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
+    // let content = generateMarkdown(data);
+    fs.writeFile(fileName, data, (err) => {
         if (err) {
           return console.log(err);
         }
-      
         console.log("Success! Your README.md file has been generated")
     });
 }
 
-const writeFileAsync = util.promisify(writeToFile);
+// Function to initialize app
+function init() {
+    console.log('Welcome to your personal README generator!');
 
-// TODO: Create a function to initialize app
-async function init() {
-    try {
+    promptUser()
+    .then((userInput) => {
 
-        // Prompt Inquirer questions
-        const userResponses = await inquirer.prompt(questions);
-        console.log("Your responses: ", userResponses);
-        console.log("Thank you for your responses! Fetching your GitHub data next...");
+
+    // inquirer.prompt(questions).then(function (data) {
+        const markdown = generateMarkdown(userInput);
+        writeToFile('README.md', markdown);
+    });
+    
+} 
+    
+    // try {
+
+    //     // Prompt Inquirer questions
+    //     const userResponses = await inquirer.prompt(questions);
+    //     console.log("Your responses: ", userResponses);
+    //     console.log("Thank you for your responses! Fetching your GitHub data next...");
     
         // Call GitHub api for user info
-        const userInfo = await api.getUser(userResponses);
-        console.log("Your GitHub user info: ", userInfo);
+        // const userInfo = await api.getUser(userResponses);
+        // console.log("Your GitHub user info: ", userInfo);
     
         // Pass Inquirer userResponses and GitHub userInfo to generateMarkdown
-        console.log("Generating your README next...")
-        const markdown = generateMarkdown(userResponses, userInfo);
-        console.log(markdown);
+        // console.log("Generating your README next...")
+        // const markdown = generateMarkdown(userResponses, userInfo);
+        // console.log(markdown);
     
-        // Write markdown to file
-        await writeFileAsync('ExampleREADME.md', markdown);
+        // // Write markdown to file
+        // await writeFileAsync('ExampleREADME.md', markdown);
 
-    } catch (error) {
-        console.log(error);
-    }
-};
+        // const fileName = 'README.md';
+        // const markdown = generateMarkdown(userResponses);
+        // writeToFile(fileName, markdown);
+
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 
 // Function call to initialize app
 init();
