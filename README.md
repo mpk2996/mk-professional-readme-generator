@@ -1,34 +1,30 @@
-# y
+# 09 Node.js Challenge: Professional README Generator
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+## Description
+This README generator is a command-line application that accepts user input to prompts that help fulfill the categories necessary to create a quality README for the user's project.
 
-  ## Description
-  y
-  
-  ## Table of Contents
-  undefined
+## Visuals
+![Screenshot of the application](./images/m9-sample-readme.png)
 
-  
-  ## Installation
-  y
-  
-  ## Usage
-  y
+https://drive.google.com/file/d/136SZAjh0yEW6Gijh2mDfoYsxMwMI7EFe/view
 
-  ## License
+## Installation
+To install this application, you will need to clone the repository from GitHub.
+git clone
+https://github.com/m9861036/readme-generator.git
 
-This project is licensed under the apache 2.0 license. See the [License]([License](https://opensource.org/licenses/apache 2.0)) file for more information.
-  
-  ## Contributing
-  undefined
-  
-  ## Tests
-  y
-  
-  
-  ## Questions
-  
-  If you have any questions, feel free to reach out:
-  
-  GitHub: [y](https://github.com/y)
-  Email: y
+## Contributing
+To contribute to this project, create a pull request using the following steps:
+- Fork the repo
+- Create a feature branch (git checkout -b BRANCH-NAME)
+- Commit your changes (git commit -m "Added x feature")
+- Push to the branch (git push origin BRANCH-NAME)
+- Create a new Pull Request
+
+## License
+MIT License
+
+## Contact Information:
+GitHub Username: mpk2996
+
+GitHub Profile: https://github.com/mpk2996
